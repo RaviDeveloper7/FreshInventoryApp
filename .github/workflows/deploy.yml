@@ -17,13 +17,17 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
+    # FIX: Added 'working-directory' so it navigates into your project folder first
     - name: Restore NuGet Packages
+      working-directory: ./FreshInventory.API
       run: dotnet restore
 
+    # FIX: Added 'working-directory' here as well
     - name: Build Web API Project
+      working-directory: ./FreshInventory.API
       run: dotnet build --configuration Release --no-restore
 
-    # Packages your clean API directly
+    # FIX: Point directly to the local file layout
     - name: Publish Web API Binaries
       run: dotnet publish ./FreshInventory.API/FreshInventory.API.csproj --configuration Release --output ./publish
 
